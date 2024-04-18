@@ -17,7 +17,7 @@ class CreateTablePersonnel extends Migration
             $table->id();
             $table->string("nom",50);
             $table->string("prenom");
-            $table->float("salaire");
+            // $table->float("salaire");
             $table->timestamps();
         });
     }

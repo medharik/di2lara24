@@ -17,7 +17,7 @@ class CreateProfsTable extends Migration
             $table->id();
             $table->string("nom",50);
             $table->string("prenom",100);
-            $table->float("salaire");
+            // $table->float("salaire");
             $table->timestamps();
         });
     }
