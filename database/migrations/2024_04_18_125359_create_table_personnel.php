@@ -15,6 +15,9 @@ class CreateTablePersonnel extends Migration
     {
         Schema::create('table_personnel', function (Blueprint $table) {
             $table->id();
+            $table->string("nom",50);
+            $table->string("prenom");
+            $table->float("salaire");
             $table->timestamps();
         });
     }
