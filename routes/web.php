@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProduitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProduitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/product/create', [ProductController::class,'create'] );
+Route::post('/product/store', [ProductController::class,'store'] );
 Route::get('/produit/afficher', [ProduitController::class,'afficher']);
 Route::get('/produit/{libelle?}/{prix?}', [ProduitController::class,'index']);
 Route::get('/form', function () {
