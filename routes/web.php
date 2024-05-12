@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProduitController;
+use App\Models\Departement;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,25 +19,32 @@ use App\Http\Controllers\ProduitController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/product/create', [ProductController::class,'create'] );
-Route::post('/product/store', [ProductController::class,'store'] );
-Route::get('/produit/afficher', [ProduitController::class,'afficher']);
-Route::get('/produit/{libelle?}/{prix?}', [ProduitController::class,'index']);
-Route::get('/form', function () {
-    return view('form');
-});
+    // Route::get('/', function () {
+    //     return view('welcome');
+    // });
+    // Route::get('/product/create', [ProductController::class,'create'] );
+    // Route::post('/product/store', [ProductController::class,'store'] );
+    // Route::get('/produit/afficher', [ProduitController::class,'afficher']);
+    // Route::get('/produit/{libelle?}/{prix?}', [ProduitController::class,'index']);
+    // Route::get('/form', function () {
+    //     return view('form');
+    // });
 
-Route::get('/prenom/{pr?}', function ($pr="inconnu") {
-    return   "je m'appele $pr";
-});
-Route::get('/somme/{a?}/{b?}', function ($a=0,$b=0) {
-    $somme=$a+$b;
-    return view('somme',['a'=>$a,'deuxieme'=>$b,'somme'=>$somme])  ;
-})->where(['a' => '[0-9]+', 'b' => '[0-9]+']);
-Route::post('/somme', function (Request $r) {
+    // Route::get('/prenom/{pr?}', function ($pr="inconnu") {
+    //     return   "je m'appele $pr";
+    // });
+    // Route::get('/somme/{a?}/{b?}', function ($a=0,$b=0) {
+    //     $somme=$a+$b;
+    //     return view('somme',['a'=>$a,'deuxieme'=>$b,'somme'=>$somme])  ;
+    // })->where(['a' => '[0-9]+', 'b' => '[0-9]+']);
+    // Route::post('/somme', function (Request $r) {
 
-    return view('somme',['a'=>$r->a,'deuxieme'=>$r->b,'somme'=>$r->a+$r->b])  ;
-})->where(['a' => '[0-9]+', 'b' => '[0-9]+']);
+    //     return view('somme',['a'=>$r->a,'deuxieme'=>$r->b,'somme'=>$r->a+$r->b])  ;
+    // })->where(['a' => '[0-9]+', 'b' => '[0-9]+']);
+
+Route::resource('products', ProductController::class);
+Route::resource('employees', EmployeeController::class);
+Route::resource('departements', DepartementController::class);
+
+Route::get('test', [ProductController::class,'test'])->name('youssef');
+// Route::get('test', [ProductController::class,'test'])->name('youssef');

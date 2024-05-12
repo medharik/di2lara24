@@ -2,36 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Departement;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     * method : GET / URI : /products   ou bien utilise la route : product.index
+     * route : employees.index
      */
     public function index()
     {
-        $produits =  Product::all();
-        return $produits;
-    }
-
-    function test()
-    {
-        return view("test");
+        $employees =  Employee::all();
+        return view("employees.index", compact('employees'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * route : employees.create
      */
     public function create()
     {
-        //
+       $departements= Departement::all();
+        return view("employees.create",compact('departements'));
     }
 
     /**
@@ -39,12 +37,13 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     * method : POST , URL : /product ou la route : product.store
+     * route : employees.store
      */
     public function store(Request $request)
     {
-        //
-        echo "je suis dans store";
+        Employee::create($request->all());
+
+        return redirect()->route("employees.index");
     }
 
     /**
@@ -55,8 +54,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-       $produit= Product::find($id);
-        return $produit;
+       $employee= Employee::find($id);
+       return view("employees.show",compact('employee'));
     }
 
     /**
@@ -64,26 +63,28 @@ class ProductController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     *
      */
     public function edit($id)
     {
-        echo "je suis dans edit";
+        //recuperer l'objet employee
+      $employee=  Employee::find($id);
+return view("employees.edit",compact('employee'));
+
     }
 
     /**
-     * Update the specified resource in storage bd.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     * method : PUT
-     * url : produit/id , route : products.update
      */
     public function update(Request $request, $id)
     {
-        echo "je suis dans update, et id= $id";
-        //
+      $employee=  Employee::find($id);
+$employee->update($request->all());
+//redirection vers la page d'affichage
+return redirect()->route('employees.index');
     }
 
     /**
@@ -91,10 +92,12 @@ class ProductController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     * methode : DELETE , uri : products/2 , route : products.destroy
      */
     public function destroy($id)
     {
-        echo " je suis dans destroy et id = $id";
+      $employee=  Employee::find($id);
+      $employee->delete();
+      return redirect()->route('employees.index');
+
     }
 }
