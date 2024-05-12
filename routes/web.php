@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\StudentController;
 use App\Models\Departement;
 
 /*
@@ -45,6 +47,8 @@ use App\Models\Departement;
 Route::resource('products', ProductController::class);
 Route::resource('employees', EmployeeController::class);
 Route::resource('departements', DepartementController::class);
+Route::resource('classes', ClasseController::class);
+Route::resource('students', StudentController::class);
 
 Route::get('test', [ProductController::class,'test'])->name('youssef');
 // Route::get('test', [ProductController::class,'test'])->name('youssef');
